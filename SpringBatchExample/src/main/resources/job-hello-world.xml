@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:batch="http://www.springframework.org/schema/batch" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/batch
+		http://www.springframework.org/schema/batch/spring-batch-3.0.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<import resource="context.xml" />
+
+	<bean id="helloWorldTasklet" class="com.ravi.simple.HelloWorldTasklet" />
+	<bean id="goodByeTasklet" class="com.ravi.simple.GoodByeTasklet" />
+
+	<job id="helloWorldJob" xmlns="http://www.springframework.org/schema/batch">
+		<step id="sayHelloWorld" next="sayGoodBye">
+			<tasklet ref="helloWorldTasklet" />
+		</step>
+		<step id="sayGoodBye" >
+			<tasklet ref="goodByeTasklet" />
+		</step>
+	</job>
+
+</beans>
